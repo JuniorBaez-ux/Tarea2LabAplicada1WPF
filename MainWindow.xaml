@@ -1,0 +1,58 @@
+﻿<Window x:Class="Tarea2LabAplicada1WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tarea2LabAplicada1WPF"
+        mc:Ignorable="d"
+        Title="Registro de Usuarios" Height="350" Width="700">
+    <Grid>
+
+        <StackPanel Orientation="Vertical" Margin="20,20">
+
+            <StackPanel Orientation="Horizontal" Margin="10,0">
+                <Label Content="ID"/>
+                <TextBox x:Name="IDTextbox" Height="15" Width="90" Margin="5,0"/>
+                <Button x:Name="BuscarIDButton" Height="30" Width="35" Click="BuscarIDButton_Click"/>
+                <CheckBox x:Name="ActivoChecBox" Content="Activo" IsChecked="True"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="10,10">
+                <Label Content="Alias"/>
+                <TextBox x:Name="AliasTextbox" Height="15" Width="90" Margin="5,0"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Label Content="Nivel"/>
+                    <ComboBox Name="NivelComboBox" IsEditable="True" IsReadOnly="True" Text="Administrador" Background="Gray">
+                        <ComboBoxItem Content="Administrador"/>
+                    </ComboBox>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="10,10">
+                <Label Content="Nombre"/>
+                <TextBox x:Name="NombreTextbox" Height="15" Width="90" Margin="5,0"/>
+
+                <Label Content="Email"/>
+                <TextBox x:Name="EmailTextBox" Height="15" Width="90" Margin="5,0"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="60,10">
+                <Label Content="Clave"/>
+                <TextBox x:Name="ClaveTextbox" Height="15" Width="90" Margin="5,0"/>
+
+                <Label Content="Confirmar Clave"/>
+                <TextBox x:Name="ConfirmarClaveTextBox" Height="15" Width="90" Margin="5,0"/>
+
+                <Label Content="Costo x Hora"/>
+                <TextBox x:Name="CostoXHoraTextBox" Height="15" Width="90" Margin="5,0"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Margin="10,0" HorizontalAlignment="Center">
+                <Button x:Name="NuevoButton" Content="Nuevo" Height="70" Width="70" Margin="15,0" VerticalAlignment="Top" VerticalContentAlignment="Bottom" Click="NuevoButton_Click"/>
+                <Button x:Name="GuardarButton" Content="Guardar" Height="70" Width="70" Margin="15,0" VerticalAlignment="Top" VerticalContentAlignment="Bottom" Click="GuardarButton_Click"/>
+                <Button x:Name="EliminarButton" Content="Eliminar" Height="70" Width="70" Margin="15,0" VerticalAlignment="Top" VerticalContentAlignment="Bottom" Click="EliminarButton_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
