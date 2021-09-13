@@ -16,7 +16,7 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,10">
-                <Label Content="Nombre"/>
+                <Label Content="Descripcion"/>
                 <TextBox x:Name="NombreTextBox" Height="20" Width="250"/>
             </StackPanel>
 
