@@ -31,18 +31,23 @@ namespace Tarea2LabAplicada1WPF
         private Usuario usuario = new Usuario();
         private void BuscarIDButton_Click(object sender, RoutedEventArgs e)
         {
-            var usuario = UsuarioBLL.Buscar(Utilidades.ToInt(IDTextbox.Text));
+            int id;
+            Usuario usuario = new Usuario();
+            int.TryParse(IDTextbox.Text, out id);
 
-            if (usuario!= null)
+            Limpiar();
+
+            usuario = UsuarioBLL.Buscar(id);
+
+            if (usuario != null)
             {
-                this.usuario= usuario;
+                MessageBox.Show("Persona Encotrada");
+                LlenarCampos(usuario);
             }
             else
             {
-                this.usuario = new Usuario();
+                MessageBox.Show("Persona no Encontrada");
             }
-
-            this.DataContext = this.usuario;
         }
 
         private void NuevoButton_Click(object sender, RoutedEventArgs e)
@@ -60,40 +65,28 @@ namespace Tarea2LabAplicada1WPF
             if (paso)
             {
                 Limpiar();
-                MessageBox.Show("Operacion Exitosa!", "Exito", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Usuario guardado Correctamente", "Exito", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else
             {
-                MessageBox.Show("Operacion Fallida!", "Fallo", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Usuario modificado correctamente", "Fallo", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
         private void EliminarButton_Click(object sender, RoutedEventArgs e)
         {
-            if (RolesBLL.Eliminar(Utilidades.ToInt(IDTextbox.Text)))
+            int id;
+            int.TryParse(IDTextbox.Text, out id);
+            Limpiar();
+            if (UsuarioBLL.Eliminar(id))
             {
-                Limpiar();
-                MessageBox.Show("Registro Eliminado", "Exito", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Usuario eliminado correctamente", "Proceso exitoso", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
-                MessageBox.Show("No fue posible eliminar", "Fallo", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("ID no existente");
             }
         }
-
-        private bool Validar()
-        {
-            bool esValido = true;
-
-            if (NombreTextbox.Text.Length == 0)
-            {
-                esValido = false;
-                MessageBox.Show("Transaccion Fallida", "Fallo", MessageBoxButton.OK, MessageBoxImage.Warning);
-            }
-
-            return esValido;
-        }
-
 
         private void Limpiar()
         {
@@ -105,5 +98,95 @@ namespace Tarea2LabAplicada1WPF
             ActivoChecBox.IsChecked = false;
             NivelComboBox.Text = "";
         }
+
+        private bool ExisteEnLaBaseDeDatos()
+        {
+            Usuario usuarios = UsuarioBLL.Buscar(Utilidades.ToInt(IDTextbox.Text));
+
+            return (usuarios != null);
+        }
+
+        private void LlenarCampos(Usuario usuarios)
+        {
+            IDTextbox.Text = usuarios.UsuarioID.ToString();
+            NombreTextbox.Text = usuarios.Nombre;
+            EmailTextBox.Text = usuarios.Email;
+            AliasTextbox.Text = usuarios.Alias;
+            ClaveTextbox.Text = usuarios.Clave;
+        }
+
+        private Usuario LlenarClase()
+        {
+            Usuario usuarios = new Usuario();
+            usuarios.UsuarioID = Utilidades.ToInt(IDTextbox.Text);
+            usuarios.Clave = ClaveTextbox.Text;
+            usuarios.Email = EmailTextBox.Text;
+            usuarios.Nombre = NombreTextbox.Text;
+            usuarios.Alias = AliasTextbox.Text;
+
+            return usuarios;
+        }
+
+        private bool Validar()
+        {
+            bool paso = true;
+
+            if (NombreTextbox.Text == string.Empty)
+            {
+                MessageBox.Show("El campo nombre no puede estar vacio");
+                NombreTextbox.Focus();
+                paso = false;
+            }
+
+            if (string.IsNullOrWhiteSpace(NivelComboBox.Text))
+            {
+                MessageBox.Show("Debe agregar un rol especifico");
+                NivelComboBox.Focus();
+                paso = false;
+            }
+
+            if (AliasTextbox.Text == string.Empty)
+            {
+                MessageBox.Show("El campo de alias no puede estar vacio");
+                AliasTextbox.Focus();
+                paso = false;
+            }
+
+            if (ClaveTextbox.Text == string.Empty)
+            {
+                MessageBox.Show("El campo de clave no puede estar vacio");
+                ClaveTextbox.Focus();
+                paso = false;
+            }
+
+            if (ConfirmarClaveTextBox.Text == string.Empty)
+            {
+                MessageBox.Show("El campo de confirmar clave no puede estar vacio");
+                ConfirmarClaveTextBox.Focus();
+                paso = false;
+            }
+
+            if (EmailTextBox.Text == string.Empty)
+            {
+                MessageBox.Show("El campo de email no puede estar vacio");
+                EmailTextBox.Focus();
+                paso = false;
+            }
+            if (UsuarioBLL.ExisteAlias(AliasTextbox.Text))
+            {
+                MessageBox.Show("Este Alias ya existe");
+                AliasTextbox.Focus();
+                paso = false;
+            }
+            if (string.Equals(ClaveTextbox.Text, ConfirmarClaveTextBox.Text) != true)
+            {
+                MessageBox.Show("La clave es distinta");
+                ConfirmarClaveTextBox.Focus();
+                paso = false;
+            }
+
+            return paso;
+        }
+
     }
 }

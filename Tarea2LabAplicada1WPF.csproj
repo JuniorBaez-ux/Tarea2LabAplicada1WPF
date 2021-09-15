@@ -7,6 +7,31 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\simbolo-de-interfaz-de-lupa-de-busqueda.png" />
+    <None Remove="Resources\WhatsApp Image 2021-09-10 at 12.57.08 PM %281%29.jpeg" />
+    <None Remove="Resources\WhatsApp Image 2021-09-10 at 12.57.09 PM %281%29.jpeg" />
+    <None Remove="Resources\WhatsApp Image 2021-09-10 at 12.57.09 PM.jpeg" />
+    <None Remove="WhatsApp Image 2021-09-10 at 12.57.08 PM %281%29.jpeg" />
+    <None Remove="WhatsApp Image 2021-09-10 at 12.57.09 PM %281%29.jpeg" />
+    <None Remove="WhatsApp Image 2021-09-10 at 12.57.09 PM.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\simbolo-de-interfaz-de-lupa-de-busqueda.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WhatsApp Image 2021-09-10 at 12.57.08 PM (1).jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WhatsApp Image 2021-09-10 at 12.57.09 PM (1).jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\WhatsApp Image 2021-09-10 at 12.57.09 PM.jpeg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="UI\Consultas\" />
     <Folder Include="UI\Reportes\" />
@@ -19,6 +44,27 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="WhatsApp Image 2021-09-10 at 12.57.08 PM (1).jpeg" />
+    <Resource Include="WhatsApp Image 2021-09-10 at 12.57.09 PM (1).jpeg" />
+    <Resource Include="WhatsApp Image 2021-09-10 at 12.57.09 PM.jpeg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
